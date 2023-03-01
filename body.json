@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "item": "Clean Room",
+        "completed": true
+    },
+    {
+        "id": "2",
+        "item": "Dirty Room",
+        "completed": false
+    },
+    {
+        "id": "3",
+        "item": "Messy Room",
+        "completed": false
+    },
+    {
+        "id": "4",
+        "item": "Hellish Room",
+        "completed": false
+    },
+    {
+        "id": "5",
+        "item": "Demolishing Room",
+        "completed": true
+    }
+]
