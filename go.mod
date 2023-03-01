@@ -1,4 +1,4 @@
-module github.com/RickHPotter/flutter_web_api
+module github.com/RickHPotter/flutter_rest_api
 
 go 1.20
 

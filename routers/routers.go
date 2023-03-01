@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"github.com/RickHPotter/flutter_web_api/controllers"
-	"github.com/RickHPotter/flutter_web_api/models"
+	"github.com/RickHPotter/flutter_rest_api/controllers"
+	"github.com/RickHPotter/flutter_rest_api/models"
 	"github.com/gin-gonic/gin"
 )
 

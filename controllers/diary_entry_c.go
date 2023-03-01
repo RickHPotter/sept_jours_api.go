@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/RickHPotter/flutter_web_api/models"
+	"github.com/RickHPotter/flutter_rest_api/models"
 	"github.com/gin-gonic/gin"
 )
 
