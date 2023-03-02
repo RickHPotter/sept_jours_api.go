@@ -48,18 +48,18 @@ func AddDiaryEntry(context *gin.Context) {
 PATCH
 */
 
-func ToggleDiaryEntryStatus(context *gin.Context) {
-	id := context.Param("id")
-	diaryEntry, _, err := models.GetDiaryEntryById(id)
-	if err != nil {
-		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
-		return
-	}
+// func ToggleDiaryEntryStatus(context *gin.Context) {
+// 	id := context.Param("id")
+// 	diaryEntry, _, err := models.GetDiaryEntryById(id)
+// 	if err != nil {
+// 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
+// 		return
+// 	}
 
-	models.PatchDiaryEntry(&(diaryEntry.Completed), !(diaryEntry.Completed))
+// 	models.PatchDiaryEntry(&(diaryEntry.Completed), !(diaryEntry.Completed))
 
-	context.IndentedJSON(http.StatusOK, diaryEntry)
-}
+// 	context.IndentedJSON(http.StatusOK, diaryEntry)
+// }
 
 /*
 DELETE
@@ -72,16 +72,16 @@ func DeleteDiaryEntry(context *gin.Context) {
 		return
 	}
 
-	DiaryEntry, index, err := models.GetDiaryEntryById(id)
+	_, index, err := models.GetDiaryEntryById(id)
 	if err != nil {
 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
 		return
 	}
 
-	if !DiaryEntry.Completed {
-		context.IndentedJSON(http.StatusNotAcceptable, gin.H{"message": UNCOMPLETED_ENTRY})
-		return
-	}
+	// if !DiaryEntry.Completed {
+	// 	context.IndentedJSON(http.StatusNotAcceptable, gin.H{"message": UNCOMPLETED_ENTRY})
+	// 	return
+	// }
 
 	models.DeleteDiaryEntry(index)
 

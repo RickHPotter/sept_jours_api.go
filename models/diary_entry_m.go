@@ -8,8 +8,9 @@ var DiaryEntries []DiaryEntry
 
 type DiaryEntry struct {
 	ID        string `json:"id"`
-	Item      string `json:"item"`
-	Completed bool   `json:"completed"`
+	Content   string `json:"content"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 /*
@@ -38,7 +39,12 @@ func PostDiaryEntry(newDiaryEntry DiaryEntry) {
 PATCH
 */
 
-func PatchDiaryEntry(field *bool, newValue bool) {
+func PatchDiaryEntryBoolean(field *bool, newValue bool) {
+	*field = newValue
+	WriteJson()
+}
+
+func PatchDiaryEntryString(field *string, newValue string) {
 	*field = newValue
 	WriteJson()
 }

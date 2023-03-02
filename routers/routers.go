@@ -19,7 +19,7 @@ func LoadRouters() {
 	router.POST("/diary/entry", controllers.AddDiaryEntry)
 
 	// PATCH
-	router.PATCH("/diary/entry/:id", controllers.ToggleDiaryEntryStatus)
+	// router.PATCH("/diary/entry/:id", controllers.ToggleDiaryEntryStatus)
 
 	// DELETE
 	router.DELETE("/diary/entry/delete/", controllers.DeleteDiaryEntry)
