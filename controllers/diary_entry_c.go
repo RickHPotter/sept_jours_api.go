@@ -48,24 +48,49 @@ func AddDiaryEntry(context *gin.Context) {
 PATCH
 */
 
-// func ToggleDiaryEntryStatus(context *gin.Context) {
-// 	id := context.Param("id")
-// 	diaryEntry, _, err := models.GetDiaryEntryById(id)
-// 	if err != nil {
-// 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
-// 		return
-// 	}
+func UpdateDiaryEntry(context *gin.Context) {
+	id, ok := context.GetQuery("id")
+	if !ok {
+		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": MISSING_ID})
+		return
+	}
 
-// 	models.PatchDiaryEntry(&(diaryEntry.Completed), !(diaryEntry.Completed))
+	var updatedDiaryEntry models.DiaryEntry
 
-// 	context.IndentedJSON(http.StatusOK, diaryEntry)
-// }
+	err := context.BindJSON(&updatedDiaryEntry)
+	if err != nil {
+		return
+	}
+
+	if id != updatedDiaryEntry.ID {
+		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": CONFLICTING_ID})
+		return
+	}
+
+	diaryEntry, _, er := models.GetDiaryEntryById(id)
+	if er != nil {
+		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
+		return
+	}
+
+	sliceFields := []*string{
+		&(diaryEntry.UpdatedAt),
+		&(diaryEntry.Content),
+	}
+
+	sliceValues := []string{
+		updatedDiaryEntry.UpdatedAt,
+		updatedDiaryEntry.Content,
+	}
+
+	models.PatchDiaryEntryString(sliceFields, sliceValues)
+}
 
 /*
 DELETE
 */
 
-func DeleteDiaryEntry(context *gin.Context) {
+func DeleteDiaryEntryById(context *gin.Context) {
 	id, ok := context.GetQuery("id")
 	if !ok {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": MISSING_ID})
@@ -77,11 +102,6 @@ func DeleteDiaryEntry(context *gin.Context) {
 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
 		return
 	}
-
-	// if !DiaryEntry.Completed {
-	// 	context.IndentedJSON(http.StatusNotAcceptable, gin.H{"message": UNCOMPLETED_ENTRY})
-	// 	return
-	// }
 
 	models.DeleteDiaryEntry(index)
 

@@ -1,146 +1,68 @@
 [
     {
-        "id": "1",
-        "content": "Clean Room",
-        "createdAt": "",
-        "updatedAt": ""
+        "id": "42f9be50-b902-11ed-a0d3-8f7d42992c40",
+        "content": "This is my first attempt at sending a post request through my class Flutter project to my REST API using Golang. ",
+        "createdAt": "2023-02-20 10:35:44.419740",
+        "updatedAt": "2023-02-20 10:35:44.419740"
     },
     {
-        "id": "2",
-        "content": "Dirty Room",
-        "createdAt": "",
-        "updatedAt": ""
+        "id": "13d140d0-b9c5-11ed-8fda-3583eb95ce73",
+        "content": "Day 3",
+        "createdAt": "2023-03-03 10:08:23.504956",
+        "updatedAt": "2023-03-03 10:08:23.504956"
     },
     {
-        "id": "3",
-        "content": "Messy Room",
-        "createdAt": "",
-        "updatedAt": ""
+        "id": "1b4e3700-b9c5-11ed-8fda-3583eb95ce73",
+        "content": "Day 2",
+        "createdAt": "2023-03-02 10:08:23.504956",
+        "updatedAt": "2023-03-02 10:08:23.504956"
     },
     {
-        "id": "4",
-        "content": "Hellish Room",
-        "createdAt": "",
-        "updatedAt": ""
+        "id": "21c9e9d0-b9c5-11ed-8fda-3583eb95ce73",
+        "content": "Day 28",
+        "createdAt": "2023-02-28 10:08:23.504956",
+        "updatedAt": "2023-02-28 10:08:23.504956"
     },
     {
-        "id": "5",
-        "content": "Demolishing Room",
-        "createdAt": "",
-        "updatedAt": ""
+        "id": "21c9e9d0-b9c6-11ed-8fda-3583eb95ce73",
+        "content": "Day 28 Again",
+        "createdAt": "2023-02-28 10:08:23.504956",
+        "updatedAt": "2023-02-28 10:08:23.504956"
     },
     {
-        "id": "375f4fe0-b86e-11ed-8ab0-c33334f8e687",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:18:23.329101",
-        "updatedAt": "2023-03-01 17:18:23.329111"
+        "id": "21c9e9d0-b9c7-11ed-8fda-3583eb95ce73",
+        "content": "Day 28 Yet Again",
+        "createdAt": "2023-02-28 10:08:23.504956",
+        "updatedAt": "2023-02-28 10:08:23.504956"
     },
     {
-        "id": "593df760-b86e-11ed-8ab0-c33334f8e687",
-        "content": "",
-        "createdAt": "2023-02-22 17:18:23.870547",
-        "updatedAt": "2023-02-22 17:18:23.870547"
+        "id": "adf001f0-b9da-11ed-9606-afb4e96046e6",
+        "content": "YES",
+        "createdAt": "2023-03-01 12:47:04.681382",
+        "updatedAt": "2023-03-01 12:47:04.681382"
     },
     {
-        "id": "593df760-b86e-11ed-8ab0-c33334f8e687",
-        "content": "",
-        "createdAt": "2023-02-22 17:18:23.870547",
-        "updatedAt": "2023-02-22 17:18:23.870547"
+        "id": "0b53c460-b9e2-11ed-9085-c922efda7eb0",
+        "content": "day 27",
+        "createdAt": "2023-02-27 13:39:57.626373",
+        "updatedAt": "2023-02-27 13:39:57.626373"
     },
     {
-        "id": "88642ae0-b86f-11ed-b3f2-790b8207289a",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:27:48.753787",
-        "updatedAt": "2023-03-01 17:27:48.753797"
+        "id": "21c9e9d0-b9c1-11ed-8fda-3583eb95ce73",
+        "content": "Day 28 Just Once More",
+        "createdAt": "2023-02-28 10:08:23.504956",
+        "updatedAt": "2023-03-28 10:08:23.504960"
     },
     {
-        "id": "b3ad40b0-b86f-11ed-b3f2-790b8207289a",
-        "content": "",
-        "createdAt": "2023-02-21 17:27:49.296355",
-        "updatedAt": "2023-02-21 17:27:49.296355"
+        "id": "e8c4dcb0-ba02-11ed-b7ec-c937613018d0",
+        "content": "that was a hell of a day but I got though",
+        "createdAt": "2023-02-25 17:20:20.414706",
+        "updatedAt": "2023-02-25 17:20:20.414706"
     },
     {
-        "id": "db511c40-b86f-11ed-b3f2-790b8207289a",
-        "content": "",
-        "createdAt": "2023-02-21 17:27:49.296355",
-        "updatedAt": "2023-02-21 17:27:49.296355"
-    },
-    {
-        "id": "ee21b320-b86f-11ed-861e-873580657b0f",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:30:39.445408",
-        "updatedAt": "2023-03-01 17:30:39.445425"
-    },
-    {
-        "id": "efbbdb20-b86f-11ed-861e-873580657b0f",
-        "content": "",
-        "createdAt": "2023-02-20 17:30:39.984306",
-        "updatedAt": "2023-02-20 17:30:39.984306"
-    },
-    {
-        "id": "151614d0-b870-11ed-81e1-332deb5812ba",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:31:44.800394",
-        "updatedAt": "2023-03-01 17:31:44.800404"
-    },
-    {
-        "id": "165dd710-b870-11ed-81e1-332deb5812ba",
-        "content": "Hello from the past?",
-        "createdAt": "2023-02-20 17:31:45.329202",
-        "updatedAt": "2023-02-20 17:31:45.329202"
-    },
-    {
-        "id": "8aa619b0-b871-11ed-a569-f5d004c0c8ee",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:42:11.534628",
-        "updatedAt": "2023-03-01 17:42:11.534637"
-    },
-    {
-        "id": "8c5fd7a0-b871-11ed-a569-f5d004c0c8ee",
-        "content": "My arse is on fire. Must've be the spicy noodles.",
-        "createdAt": "2023-02-19 17:42:12.083318",
-        "updatedAt": "2023-02-19 17:42:12.083318"
-    },
-    {
-        "id": "9f433330-b871-11ed-a569-f5d004c0c8ee",
-        "content": "just a bit of a test \"",
-        "createdAt": "2023-02-21 17:42:12.083318",
-        "updatedAt": "2023-02-21 17:42:12.083318"
-    },
-    {
-        "id": "994f7fa0-b872-11ed-871b-9be06ae0553a",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:49:45.628857",
-        "updatedAt": "2023-03-01 17:49:45.628865"
-    },
-    {
-        "id": "9be852f0-b872-11ed-871b-9be06ae0553a",
-        "content": "we fucked all night",
-        "createdAt": "2023-02-20 17:49:46.164491",
-        "updatedAt": "2023-02-20 17:49:46.164491"
-    },
-    {
-        "id": "c5979970-b873-11ed-8413-a7d56ec6283f",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 17:58:09.418342",
-        "updatedAt": "2023-03-01 17:58:09.418351"
-    },
-    {
-        "id": "c72601a0-b873-11ed-8413-a7d56ec6283f",
-        "content": "just yet another test",
-        "createdAt": "2023-02-19 17:58:09.950772",
-        "updatedAt": "2023-02-19 17:58:09.950772"
-    },
-    {
-        "id": "003166d0-b877-11ed-83bc-2bffe7c6ce25",
-        "content": "No Content Room",
-        "createdAt": "2023-03-01 18:21:16.227880",
-        "updatedAt": "2023-03-01 18:21:16.227892"
-    },
-    {
-        "id": "03cb5670-b877-11ed-83bc-2bffe7c6ce25",
-        "content": "test",
-        "createdAt": "2023-02-20 18:21:17.637808",
-        "updatedAt": "2023-02-20 18:21:17.637808"
+        "id": "cbf8d360-ba08-11ed-810a-93f7dfeef9c8",
+        "content": "a new one",
+        "createdAt": "2023-02-26 18:16:39.282130",
+        "updatedAt": "2023-02-26 18:16:39.282130"
     }
 ]

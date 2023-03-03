@@ -44,8 +44,10 @@ func PatchDiaryEntryBoolean(field *bool, newValue bool) {
 	WriteJson()
 }
 
-func PatchDiaryEntryString(field *string, newValue string) {
-	*field = newValue
+func PatchDiaryEntryString(field []*string, newValue []string) {
+	for i := range field {
+		*field[i] = newValue[i]
+	}
 	WriteJson()
 }
 

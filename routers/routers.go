@@ -16,13 +16,13 @@ func LoadRouters() {
 	router.GET("/diary/entry/:id", controllers.GetDiaryEntry)
 
 	// POST
-	router.POST("/diary/entry", controllers.AddDiaryEntry)
+	router.POST("/diary/entry/insert", controllers.AddDiaryEntry)
 
 	// PATCH
-	// router.PATCH("/diary/entry/:id", controllers.ToggleDiaryEntryStatus)
+	router.PATCH("/diary/entry/update", controllers.UpdateDiaryEntry)
 
 	// DELETE
-	router.DELETE("/diary/entry/delete/", controllers.DeleteDiaryEntry)
+	router.DELETE("/diary/entry/delete", controllers.DeleteDiaryEntryById)
 
 	/* RUNNING */
 	router.Run("192.168.100.66:9090")
