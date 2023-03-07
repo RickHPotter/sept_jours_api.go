@@ -25,5 +25,5 @@ func LoadRouters() {
 	router.DELETE("/diary/entry/delete", controllers.DeleteDiaryEntryById)
 
 	/* RUNNING */
-	router.Run("192.168.100.66:9090")
+	router.Run(":9090")
 }

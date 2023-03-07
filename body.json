@@ -1,68 +1,8 @@
 [
     {
-        "id": "42f9be50-b902-11ed-a0d3-8f7d42992c40",
-        "content": "This is my first attempt at sending a post request through my class Flutter project to my REST API using Golang. ",
-        "createdAt": "2023-02-20 10:35:44.419740",
-        "updatedAt": "2023-02-20 10:35:44.419740"
-    },
-    {
-        "id": "13d140d0-b9c5-11ed-8fda-3583eb95ce73",
-        "content": "Day 3",
-        "createdAt": "2023-03-03 10:08:23.504956",
-        "updatedAt": "2023-03-03 10:08:23.504956"
-    },
-    {
-        "id": "1b4e3700-b9c5-11ed-8fda-3583eb95ce73",
-        "content": "Day 2",
-        "createdAt": "2023-03-02 10:08:23.504956",
-        "updatedAt": "2023-03-02 10:08:23.504956"
-    },
-    {
-        "id": "21c9e9d0-b9c5-11ed-8fda-3583eb95ce73",
-        "content": "Day 28",
-        "createdAt": "2023-02-28 10:08:23.504956",
-        "updatedAt": "2023-02-28 10:08:23.504956"
-    },
-    {
-        "id": "21c9e9d0-b9c6-11ed-8fda-3583eb95ce73",
-        "content": "Day 28 Again",
-        "createdAt": "2023-02-28 10:08:23.504956",
-        "updatedAt": "2023-02-28 10:08:23.504956"
-    },
-    {
-        "id": "21c9e9d0-b9c7-11ed-8fda-3583eb95ce73",
-        "content": "Day 28 Yet Again",
-        "createdAt": "2023-02-28 10:08:23.504956",
-        "updatedAt": "2023-02-28 10:08:23.504956"
-    },
-    {
-        "id": "adf001f0-b9da-11ed-9606-afb4e96046e6",
-        "content": "YES",
-        "createdAt": "2023-03-01 12:47:04.681382",
-        "updatedAt": "2023-03-01 12:47:04.681382"
-    },
-    {
-        "id": "0b53c460-b9e2-11ed-9085-c922efda7eb0",
-        "content": "day 27",
-        "createdAt": "2023-02-27 13:39:57.626373",
-        "updatedAt": "2023-02-27 13:39:57.626373"
-    },
-    {
-        "id": "21c9e9d0-b9c1-11ed-8fda-3583eb95ce73",
-        "content": "Day 28 Just Once More",
-        "createdAt": "2023-02-28 10:08:23.504956",
-        "updatedAt": "2023-03-28 10:08:23.504960"
-    },
-    {
-        "id": "e8c4dcb0-ba02-11ed-b7ec-c937613018d0",
-        "content": "that was a hell of a day but I got though",
-        "createdAt": "2023-02-25 17:20:20.414706",
-        "updatedAt": "2023-02-25 17:20:20.414706"
-    },
-    {
-        "id": "cbf8d360-ba08-11ed-810a-93f7dfeef9c8",
-        "content": "a new one",
-        "createdAt": "2023-02-26 18:16:39.282130",
-        "updatedAt": "2023-02-26 18:16:39.282130"
+        "id": "b5a833e0-bd31-11ed-9b06-d9d48107d40d",
+        "content": "this has been a fun project",
+        "createdAt": "2023-03-07 18:32:41.207168",
+        "updatedAt": "2023-03-07 18:32:41.207168"
     }
 ]
