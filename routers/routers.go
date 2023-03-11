@@ -13,7 +13,7 @@ func LoadRouters() {
 
 	// GET
 	router.GET("/diary/entry", controllers.GetDiaryEntries)
-	router.GET("/diary/entry/:id", controllers.GetDiaryEntry)
+	router.GET("/diary/entry/:hash", controllers.GetDiaryEntry)
 
 	// POST
 	router.POST("/diary/entry/insert", controllers.AddDiaryEntry)
@@ -22,7 +22,7 @@ func LoadRouters() {
 	router.PATCH("/diary/entry/update", controllers.UpdateDiaryEntry)
 
 	// DELETE
-	router.DELETE("/diary/entry/delete", controllers.DeleteDiaryEntryById)
+	router.DELETE("/diary/entry/delete", controllers.DeleteDiaryEntryByHash)
 
 	/* RUNNING */
 	router.Run(":9090")

@@ -16,8 +16,8 @@ func GetDiaryEntries(context *gin.Context) {
 }
 
 func GetDiaryEntry(context *gin.Context) {
-	id := context.Param("id")
-	DiaryEntry, _, err := models.GetDiaryEntryById(id)
+	id := context.Param("hash")
+	DiaryEntry, _, err := models.GetDiaryEntryByHash(id)
 	if err != nil {
 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
 		return
@@ -34,7 +34,7 @@ func AddDiaryEntry(context *gin.Context) {
 
 	var newDiaryEntry models.DiaryEntry
 
-	err := context.BindJSON(&newDiaryEntry)
+	err := context.ShouldBindJSON(&newDiaryEntry)
 	if err != nil {
 		return
 	}
@@ -49,7 +49,7 @@ PATCH
 */
 
 func UpdateDiaryEntry(context *gin.Context) {
-	id, ok := context.GetQuery("id")
+	hash, ok := context.GetQuery("hash")
 	if !ok {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": MISSING_ID})
 		return
@@ -62,25 +62,27 @@ func UpdateDiaryEntry(context *gin.Context) {
 		return
 	}
 
-	if id != updatedDiaryEntry.ID {
+	if hash != updatedDiaryEntry.Hash {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": CONFLICTING_ID})
 		return
 	}
 
-	diaryEntry, _, er := models.GetDiaryEntryById(id)
+	diaryEntry, _, er := models.GetDiaryEntryByHash(hash)
 	if er != nil {
 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
 		return
 	}
 
 	sliceFields := []*string{
-		&(diaryEntry.UpdatedAt),
+		&(diaryEntry.Title),
 		&(diaryEntry.Content),
+		&(diaryEntry.UpdatedAt),
 	}
 
 	sliceValues := []string{
-		updatedDiaryEntry.UpdatedAt,
+		updatedDiaryEntry.Title,
 		updatedDiaryEntry.Content,
+		updatedDiaryEntry.UpdatedAt,
 	}
 
 	models.PatchDiaryEntryString(sliceFields, sliceValues)
@@ -90,14 +92,14 @@ func UpdateDiaryEntry(context *gin.Context) {
 DELETE
 */
 
-func DeleteDiaryEntryById(context *gin.Context) {
-	id, ok := context.GetQuery("id")
+func DeleteDiaryEntryByHash(context *gin.Context) {
+	hash, ok := context.GetQuery("hash")
 	if !ok {
 		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": MISSING_ID})
 		return
 	}
 
-	_, index, err := models.GetDiaryEntryById(id)
+	_, index, err := models.GetDiaryEntryByHash(hash)
 	if err != nil {
 		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
 		return

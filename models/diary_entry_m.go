@@ -7,8 +7,9 @@ import (
 var DiaryEntries []DiaryEntry
 
 type DiaryEntry struct {
-	ID        string `json:"id"`
-	Content   string `json:"content"`
+	Hash      string `json:"hash"`
+	Title     string `json:"title"`
+	Content   string `json:"content,"`
 	CreatedAt string `json:"createdAt"`
 	UpdatedAt string `json:"updatedAt"`
 }
@@ -17,9 +18,9 @@ type DiaryEntry struct {
 GET
 */
 
-func GetDiaryEntryById(id string) (*DiaryEntry, int, error) {
+func GetDiaryEntryByHash(hash string) (*DiaryEntry, int, error) {
 	for i, element := range DiaryEntries {
-		if element.ID == id {
+		if element.Hash == hash {
 			return &DiaryEntries[i], i, nil
 		}
 	}

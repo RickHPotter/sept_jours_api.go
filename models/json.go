@@ -32,9 +32,7 @@ func WriteJson() {
 		panic(err.Error())
 	}
 
-	for _, line := range body {
-		fn.WriteString(string(line))
-	}
+	fn.WriteString(string(body))
 
 	defer fn.Close()
 }
