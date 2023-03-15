@@ -1,30 +1,16 @@
 [
     {
-        "hash": "bd57ecb1-c117-11ed-972f-9738a5c5be83",
+        "hash": "4035b6d0-c1ca-11ed-a3ae-87d35910626f",
+        "title": "My First Real Entry!",
+        "content": "I woke up late cause I'd gone to bed as late as I could last night and still being 30 minutes late for work, I still woke up like shit.\nGivsn it was just Saturday then it was usually way calmer than weekdays, I had 2 customers to help and an errand to run assigned to me by my boss.\n\nIn the remaining of the time I was \"working\", I decided to make some improvements to my Rest API in Golang, which is the exact one I'm using now to store this Diary Entry I'm writing on this app.\n\nWork shift was over and I had to decide what I'd do, go to my aunt's because I hadn't been for so long and then go to her friend's baby shower or none of that and proceed to go to my girlfriend's. I missed her and going to someone else's baby shower seemed out of place for me, so I ended up deciding to go sleep with my girl.\n\nBefore going, I spent some alone time studying more Flutter to make theme improvements to my app (yes, this one). ",
+        "createdAt": "2023-03-11 15:02:38.516512",
+        "updatedAt": "2023-03-14 12:36:38.204616"
+    },
+    {
+        "hash": "d317b440-c27d-11ed-99de-07e896fd6079",
         "title": "Title",
-        "content": "C'est près jeune. ",
-        "createdAt": "2023-03-11 09:05:30.392070",
-        "updatedAt": "2023-03-11 13:53:39.616979"
-    },
-    {
-        "hash": "981946f0-c030-11ed-8ec5-f5c0982466c6",
-        "title": "No title?",
-        "content": "Some test.",
-        "createdAt": "2023-03-10 14:14:49.307977",
-        "updatedAt": "2023-03-11 14:33:55.008022"
-    },
-    {
-        "hash": "9e038f30-c030-11ed-8ec5-f5c0982466c6",
-        "title": "Gotta be ready for anything but what if the test is way too big?",
-        "content": "Another test.",
-        "createdAt": "2023-03-09 14:14:49.307977",
-        "updatedAt": "2023-03-11 15:09:03.513379"
-    },
-    {
-        "hash": "a1c3cb80-c030-11ed-8ec5-f5c0982466c6",
-        "title": "Hello, madam.",
-        "content": "Maybe this time I won't fail.",
-        "createdAt": "2023-03-08 14:14:49.307977",
-        "updatedAt": "2023-03-11 14:39:40.545301"
+        "content": "Green Colour Dot only if it's uptodate in the API, orange if only in the database.\n\n\nthey're still here, i have to send the delete to the api for them to be deleted, but that's fine.",
+        "createdAt": "2023-03-14 12:19:10.901740",
+        "updatedAt": "2023-03-14 12:37:40.344102"
     }
 ]
