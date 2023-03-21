@@ -2,6 +2,7 @@ package initialisers
 
 import "github.com/RickHPotter/flutter_rest_api/models"
 
-func ConnectToDatabase() {
+func PrepareDatabase() {
 	models.ConnectToDatabase()
+	models.SyncDatabase()
 }

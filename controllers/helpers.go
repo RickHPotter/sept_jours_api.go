@@ -9,7 +9,6 @@ import (
 const NOT_FOUND = "DIARY entry not found."
 const MISSING_ID = "Missing DIARY HASH query parameter."
 const CONFLICTING_ID = "JSON HASH other than the URL HASH Query."
-const UNCOMPLETED_ENTRY = "Uncompleted DIARY entry cannot be deleted."
 const DIARY_DELETED = "DIARY entry deleted."
 
 /*
@@ -23,7 +22,7 @@ func BadReq(c *gin.Context, errorMessage string) {
 }
 
 func NotFound(context *gin.Context, errorMessage string) {
-	context.IndentedJSON(http.StatusBadRequest, gin.H{
+	context.IndentedJSON(http.StatusNotFound, gin.H{
 		"Error": errorMessage,
 	})
 }

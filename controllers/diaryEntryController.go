@@ -12,18 +12,22 @@ import (
 */
 
 func GetDiaryEntries(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, models.DiaryEntries)
+	if diaryEntries, err := models.GetDiaryEntries(); err != nil {
+		BadReq(context, "What could've gone wrong?")
+	} else {
+		context.IndentedJSON(http.StatusOK, diaryEntries)
+	}
 }
 
 func GetDiaryEntry(context *gin.Context) {
-	id := context.Param("hash")
-	DiaryEntry, _, err := models.GetDiaryEntryByHash(id)
+	hash := context.Param("hash")
+	diaryEntry, err := models.GetDiaryEntryByHash(hash)
 	if err != nil {
-		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
+		NotFound(context, NOT_FOUND)
 		return
 	}
 
-	context.IndentedJSON(http.StatusOK, DiaryEntry)
+	context.IndentedJSON(http.StatusOK, diaryEntry)
 }
 
 /*
@@ -34,25 +38,19 @@ func AddDiaryEntry(context *gin.Context) {
 	// ! Get Diary Entry off Request Body
 	var newDiaryEntry models.DiaryEntry
 
-	err := context.ShouldBindJSON(&newDiaryEntry)
-	if err != nil {
+	if err := context.ShouldBindJSON(&newDiaryEntry); err != nil {
 		BadReq(context, "Something wrong with the Request.\n"+err.Error())
 		return
 	}
 
 	// ! Check if given Diary Entry Hash is in the Database already
-	var checkDiaryEntry models.DiaryEntry
-	// TODO: initialisers.DB.First(&checkDiaryEntry, "hash = ?", newDiaryEntry.Hash)
-
-	if checkDiaryEntry.Hash != "" {
+	if _, err := models.GetDiaryEntryByHash(newDiaryEntry.Hash); err == nil {
 		BadReq(context, "Diary Entry already exists. No Duplicates Allowed.")
 		return
 	}
 
 	// ! Create Diary Entry
-	result := models.PostDiaryEntry(newDiaryEntry)
-
-	if !result {
+	if err := models.PostDiaryEntry(newDiaryEntry); err != nil {
 		BadReq(context, "Failed to create Diary Entry in the Database.")
 		return
 	}
@@ -67,29 +65,34 @@ func AddDiaryEntry(context *gin.Context) {
 func UpdateDiaryEntry(context *gin.Context) {
 	hash, ok := context.GetQuery("hash")
 	if !ok {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": MISSING_ID})
+		BadReq(context, MISSING_ID)
 		return
 	}
 
-	var updatedDiaryEntry models.DiaryEntry
+	var diaryEntry models.DiaryEntry
 
-	err := context.BindJSON(&updatedDiaryEntry)
+	err := context.BindJSON(&diaryEntry)
 	if err != nil {
+		BadReq(context, "Failed to fetch request.")
 		return
 	}
 
-	if hash != updatedDiaryEntry.Hash {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"message": CONFLICTING_ID})
+	if hash != diaryEntry.Hash {
+		BadReq(context, CONFLICTING_ID)
 		return
 	}
 
-	diaryEntry, _, er := models.GetDiaryEntryByHash(hash)
-	if er != nil {
-		context.IndentedJSON(http.StatusNotFound, gin.H{"message": NOT_FOUND})
+	rowsAffected, err := models.PatchDiaryEntry(diaryEntry)
+	if rowsAffected == 0 {
+		NotFound(context, NOT_FOUND)
+		return
+	}
+	if err != nil {
+		BadReq(context, "Failed to update Diary Entry in the Database.")
 		return
 	}
 
-	models.PatchDiaryEntry(diaryEntry, updatedDiaryEntry)
+	context.IndentedJSON(http.StatusOK, diaryEntry)
 }
 
 /*
@@ -104,19 +107,17 @@ func DeleteDiaryEntryByHash(context *gin.Context) {
 		return
 	}
 
-	// TODO: CHECK IF TO-BE-DELETED ENTRY IS ACTUALLY THERE
-	// _, index, err := models.GetDiaryEntryByHash(hash)
-	// if err != nil {
-	// 	NotFound(context, NOT_FOUND)
-	// 	return
-	// }
-
 	// ! Delete Diary Entry with such Hash
 	var diary models.DiaryEntry
 	diary.Hash = hash
-	result := models.DeleteDiaryEntry(diary)
 
-	if !result {
+	rowsAffected, err := models.DeleteDiaryEntry(diary)
+
+	if rowsAffected == 0 {
+		NotFound(context, NOT_FOUND)
+		return
+	}
+	if err != nil {
 		BadReq(context, "Failed to delete Diary Entry from the Database.")
 		return
 	}

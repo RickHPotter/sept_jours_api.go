@@ -111,6 +111,10 @@ From the same package as `json.Unmarshal()`, there is `json.Marshal()`. And even
     }
 ```
 
+## GORM
+
+?? TODO: ??
+
 ## REST Api
 
 REST stands for Representational State Transfer, it's a software architetural style that defines how a web service should work and behave. REST is designed to take advantage of existing protocols, one that is usually a must is HTTP.
