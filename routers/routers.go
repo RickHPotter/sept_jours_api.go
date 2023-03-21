@@ -1,29 +1,45 @@
 package routers
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/RickHPotter/flutter_rest_api/controllers"
-	"github.com/RickHPotter/flutter_rest_api/models"
+	"github.com/RickHPotter/flutter_rest_api/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func LoadRouters() {
-	models.ReadJson()
-
 	router := gin.Default()
 
-	// GET
-	router.GET("/diary/entry", controllers.GetDiaryEntries)
-	router.GET("/diary/entry/:hash", controllers.GetDiaryEntry)
+	// ! DIARY ENTRY
 
-	// POST
-	router.POST("/diary/entry/insert", controllers.AddDiaryEntry)
+	// * GET
+	router.GET("/api/v1/diary", controllers.GetDiaryEntries)
+	router.GET("/api/v1/diary/:hash", controllers.GetDiaryEntry)
 
-	// PATCH
-	router.PATCH("/diary/entry/update", controllers.UpdateDiaryEntry)
+	// * POST
+	router.POST("/api/v1/diary/insert", middleware.RequireAuth, controllers.AddDiaryEntry)
 
-	// DELETE
-	router.DELETE("/diary/entry/delete", controllers.DeleteDiaryEntryByHash)
+	// * PATCH
+	router.PATCH("/api/v1/diary/update", controllers.UpdateDiaryEntry)
 
-	/* RUNNING */
-	router.Run(":9090")
+	// * DELETE
+	router.DELETE("/api/v1/diary/delete", controllers.DeleteDiaryEntryByHash)
+
+	// ! USERS
+
+	// * GET
+	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
+	router.GET("/logout", controllers.Logout)
+
+	// * POST
+	router.POST("/signup", controllers.SignUp)
+	router.POST("/login", controllers.Login)
+
+	// ? RUNNING
+	router.Run()
+
+	// ? SERVING
+	http.ListenAndServe(os.Getenv("PORT"), nil)
 }
