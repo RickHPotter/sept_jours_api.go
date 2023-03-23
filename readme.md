@@ -105,7 +105,7 @@ From the same package as `json.Unmarshal()`, there is `json.Marshal()`. And even
     if err != nil {
         panic(err.Error())
     } else {
-        // objectJSON is a []byte, therefore it needs to converted
+        // objectJSON is a []byte, therefore it needs to be converted
         // caution: fn not implemented
         fn.WriteString(string(objectJSON)) 
     }

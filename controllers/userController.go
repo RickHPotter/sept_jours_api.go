@@ -26,9 +26,7 @@ func SignUp(c *gin.Context) {
 	// checking if email already exists in the DB is another query, avoidable,
 	// but then I'd have holes in the debugging side
 	// ! check if email is in use
-	var user models.User
-	models.DB.First(&user, "email = ?", body.Email)
-
+	user, _ := models.GetUser("email = ?", body.Email)
 	if user.ID != 0 {
 		BadReq(c, "Failed to Sign Up. Email already in use. Login?")
 		return
@@ -43,8 +41,7 @@ func SignUp(c *gin.Context) {
 
 	// !  store in the db
 	user.Email, user.Password = body.Email, string(hash)
-	result := models.DB.Create(&user)
-	if result.Error != nil {
+	if err := models.CreateUser(*user); err != nil {
 		BadReq(c, "Failed to create a record in the DB. Is it down?")
 		return
 	}
@@ -64,11 +61,8 @@ func Login(c *gin.Context) {
 	}
 
 	// !  check if email exists
-	var user models.User
-	models.DB.First(&user, "email = ?", body.Email)
-
-	// in case First() doesn't find anything, ID will be 0 due to nil-safety
-	if user.ID == 0 {
+	user, err := models.GetUser("email = ?", body.Email)
+	if err != nil || user.ID == 0 {
 		BadReq(c, "Failed to find an account with this email. Is it wrong?")
 		return
 	}
@@ -100,10 +94,19 @@ func Login(c *gin.Context) {
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorisation", tokenStr, 3600*24*30, "", "", false, true)
 
+	// check if cookie was indeed created
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		BadReq(c, "Cookie not created. Why???")
+		return
+	}
+
 	// !  notify the user
 	c.IndentedJSON(http.StatusAccepted, gin.H{
-		"Message": "You're logged in, my homie!",
-		"Token":   tokenStr,
+		"Message":   "You're logged in, my homie!",
+		"Token":     tokenStr,
+		"expiresAt": claims["exp"].(int64),
+		"User":      user,
 	})
 }
 
@@ -115,16 +118,4 @@ func Logout(c *gin.Context) {
 	c.IndentedJSON(http.StatusAccepted, gin.H{
 		"Message": "You're logged out, my homie!",
 	})
-}
-
-func Validate(c *gin.Context) {
-	if user, exists := c.Get("user"); !exists {
-		BadReq(c, "Failed to fetch user variable from middleware.")
-		return
-	} else {
-		c.IndentedJSON(http.StatusAccepted, gin.H{
-			"Message": "You're only here because requireAuth.go decided you could.",
-			"User":    user,
-		})
-	}
 }

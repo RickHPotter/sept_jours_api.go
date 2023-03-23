@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/RickHPotter/flutter_rest_api/models"
@@ -12,7 +13,18 @@ import (
 */
 
 func GetDiaryEntries(context *gin.Context) {
-	if diaryEntries, err := models.GetDiaryEntries(); err != nil {
+	// ! Get user from cookie to check which user is using this API call
+	userCookie, exists := context.Get("user")
+	if !exists {
+		BadReq(context, "Failed to fetch user variable from middleware.")
+		return
+	}
+
+	user := userCookie.(models.User)
+
+	// ! Retrieve Diary Entries from given user_id
+	if diaryEntries, err := models.GetDiaryEntries(int(user.ID)); err != nil {
+		fmt.Print(err.Error())
 		BadReq(context, "What could've gone wrong?")
 	} else {
 		context.IndentedJSON(http.StatusOK, diaryEntries)
@@ -20,10 +32,16 @@ func GetDiaryEntries(context *gin.Context) {
 }
 
 func GetDiaryEntry(context *gin.Context) {
+	// ! Get hash off req body
 	hash := context.Param("hash")
 	diaryEntry, err := models.GetDiaryEntryByHash(hash)
 	if err != nil {
 		NotFound(context, NOT_FOUND)
+		return
+	}
+
+	// ! Check if isAuthor
+	if isNotAuthor(context, *diaryEntry) {
 		return
 	}
 
@@ -40,6 +58,17 @@ func AddDiaryEntry(context *gin.Context) {
 
 	if err := context.ShouldBindJSON(&newDiaryEntry); err != nil {
 		BadReq(context, "Something wrong with the Request.\n"+err.Error())
+		return
+	}
+
+	// ! Check if userId was informed
+	if newDiaryEntry.UserId == 0 {
+		BadReq(context, "Orphan Diary Entries not allowed. Get a UserId.")
+		return
+	}
+
+	// ! Check if userId of JSON is the same as userId of Cookie
+	if isNotAuthor(context, newDiaryEntry) {
 		return
 	}
 
@@ -63,6 +92,7 @@ func AddDiaryEntry(context *gin.Context) {
 */
 
 func UpdateDiaryEntry(context *gin.Context) {
+	// ! Get hash off req body
 	hash, ok := context.GetQuery("hash")
 	if !ok {
 		BadReq(context, MISSING_ID)
@@ -77,11 +107,18 @@ func UpdateDiaryEntry(context *gin.Context) {
 		return
 	}
 
+	// ! Check if query hash is the same as JSON hash
 	if hash != diaryEntry.Hash {
 		BadReq(context, CONFLICTING_ID)
 		return
 	}
 
+	// ! Check if isAuthor
+	if isNotAuthor(context, diaryEntry) {
+		return
+	}
+
+	// ! Perform update and validate if it did happen
 	rowsAffected, err := models.PatchDiaryEntry(diaryEntry)
 	if rowsAffected == 0 {
 		NotFound(context, NOT_FOUND)
@@ -107,6 +144,18 @@ func DeleteDiaryEntryByHash(context *gin.Context) {
 		return
 	}
 
+	// ! Check if Diary Exists
+	diaryEntry, err := models.GetDiaryEntryByHash(hash)
+	if err != nil {
+		BadReq(context, NOT_FOUND)
+		return
+	}
+
+	// ! Check if isAuthor
+	if isNotAuthor(context, *diaryEntry) {
+		return
+	}
+
 	// ! Delete Diary Entry with such Hash
 	var diary models.DiaryEntry
 	diary.Hash = hash
@@ -114,7 +163,7 @@ func DeleteDiaryEntryByHash(context *gin.Context) {
 	rowsAffected, err := models.DeleteDiaryEntry(diary)
 
 	if rowsAffected == 0 {
-		NotFound(context, NOT_FOUND)
+		NotFound(context, NOT_FOUND+" .DELETE. ")
 		return
 	}
 	if err != nil {

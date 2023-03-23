@@ -15,22 +15,21 @@ func LoadRouters() {
 	// ! DIARY ENTRY
 
 	// * GET
-	router.GET("/api/v1/diary", controllers.GetDiaryEntries)
-	router.GET("/api/v1/diary/:hash", controllers.GetDiaryEntry)
+	router.GET("/api/v1/diary", middleware.RequireAuth, controllers.GetDiaryEntries)
+	router.GET("/api/v1/diary/:hash", middleware.RequireAuth, controllers.GetDiaryEntry)
 
 	// * POST
 	router.POST("/api/v1/diary/insert", middleware.RequireAuth, controllers.AddDiaryEntry)
 
 	// * PATCH
-	router.PATCH("/api/v1/diary/update", controllers.UpdateDiaryEntry)
+	router.PATCH("/api/v1/diary/update", middleware.RequireAuth, controllers.UpdateDiaryEntry)
 
 	// * DELETE
-	router.DELETE("/api/v1/diary/delete", controllers.DeleteDiaryEntryByHash)
+	router.DELETE("/api/v1/diary/delete", middleware.RequireAuth, controllers.DeleteDiaryEntryByHash)
 
 	// ! USERS
 
 	// * GET
-	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	router.GET("/logout", controllers.Logout)
 
 	// * POST

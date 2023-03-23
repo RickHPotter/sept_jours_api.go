@@ -2,12 +2,15 @@ package models
 
 import (
 	"time"
+
+	"gorm.io/gorm"
 )
 
 var DiaryEntries []DiaryEntry
 
 type DiaryEntry struct {
 	Hash      string    `gorm:"primarykey" json:"hash"`
+	UserId    int       `gorm:"not null"`
 	Title     string    `json:"title"`
 	Content   string    `json:"content"`
 	CreatedAt time.Time `json:"createdAt"`
@@ -16,12 +19,12 @@ type DiaryEntry struct {
 }
 
 /*
-GET
+! GET
 */
 
-func GetDiaryEntries() (*[]DiaryEntry, error) {
+func GetDiaryEntries(userId int) (*[]DiaryEntry, error) {
 	var diaries []DiaryEntry
-	var err = DB.Find(&diaries).Error
+	var err = DB.Find(&diaries, "user_id = ?", userId).Error
 
 	return &diaries, err
 }
@@ -34,7 +37,7 @@ func GetDiaryEntryByHash(hash string) (*DiaryEntry, error) {
 }
 
 /*
-POST
+! POST
 */
 
 func PostDiaryEntry(newDiaryEntry DiaryEntry) error {
@@ -43,16 +46,24 @@ func PostDiaryEntry(newDiaryEntry DiaryEntry) error {
 }
 
 /*
-PATCH
+! PATCH
 */
 
 func PatchDiaryEntry(diary DiaryEntry) (int, error) {
-	db := DB.UpdateColumns(&diary)
+	var db *gorm.DB
+
+	// i know this is horrendous, but no way I found to make time.Time act like the atrocity postgress timestamp looks like
+	if diary.UpdatedAt == (time.Time{}) {
+		db = DB.Model(&diary).Updates(DiaryEntry{Title: diary.Title, Content: diary.Content})
+	} else {
+		db = DB.UpdateColumns(&diary)
+	}
+
 	return int(db.RowsAffected), db.Error
 }
 
 /*
-DELETE
+! DELETE
 */
 
 func DeleteDiaryEntry(diary DiaryEntry) (int, error) {
