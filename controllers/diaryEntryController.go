@@ -101,9 +101,8 @@ func UpdateDiaryEntry(context *gin.Context) {
 
 	var diaryEntry models.DiaryEntry
 
-	err := context.BindJSON(&diaryEntry)
-	if err != nil {
-		BadReq(context, "Failed to fetch request.")
+	if err := context.ShouldBindJSON(&diaryEntry); err != nil {
+		BadReq(context, "Something wrong with the Request.\n"+err.Error())
 		return
 	}
 
