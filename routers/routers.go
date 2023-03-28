@@ -27,6 +27,8 @@ func LoadRouters() {
 	// * DELETE
 	router.DELETE("/api/v1/diary/delete", middleware.RequireAuth, controllers.DeleteDiaryEntryByHash)
 
+	router.GET("/ping", middleware.RequireAuth, controllers.Ping)
+
 	// ! USERS
 
 	// * GET

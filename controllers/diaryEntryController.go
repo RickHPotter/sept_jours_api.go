@@ -172,3 +172,9 @@ func DeleteDiaryEntryByHash(context *gin.Context) {
 
 	Ok(context, DIARY_DELETED)
 }
+
+func Ping(c *gin.Context) {
+	c.IndentedJSON(http.StatusAccepted, gin.H{
+		"Message": "Pong.",
+	})
+}

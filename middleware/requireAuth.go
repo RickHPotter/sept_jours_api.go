@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"time"
 
 	"github.com/RickHPotter/flutter_rest_api/models"
 	"github.com/gin-gonic/gin"
@@ -43,12 +42,19 @@ func RequireAuth(c *gin.Context) {
 			return []byte(os.Getenv("SECRET")), nil
 		},
 	)
+
+	// ! Validate err
 	if err != nil {
-		Abort(c, "Failed to decode cookie. Was it touched?")
+		switch err.Error() {
+		case "Token is expired":
+			Abort(c, "Session has expired. Log in again.")
+		default:
+			Abort(c, "Failed to decode cookie. "+err.Error()+".")
+		}
 		return
 	}
 
-	// ! Validate
+	// ! Validate token // I don't know if this one is necessary,
 	// only after ParseWithClaims(), a token could be invalid, aka not populated
 	if !token.Valid {
 		Abort(c, "Token not valid. Was it touched or corrupt?")
@@ -58,12 +64,7 @@ func RequireAuth(c *gin.Context) {
 	// converting *jwt.Token.Claims to jwt.MapClaims so as to validate integrity
 	// from interface{} to map[string]interface{}
 	if claims, ok := token.Claims.(jwt.MapClaims); ok {
-		// check "exp"claim
-		// Note that claims["exp"] is an interface{} and needs to be converted
-		if float64(time.Now().Unix()) > claims["exp"].(float64) {
-			Abort(c, "Session Cookie has expired!")
-			return
-		}
+		// there's no need to check "exp" claim, ParseWithClaims already does that
 
 		// "sub" claim is usually user.ID, no change here
 		var user models.User

@@ -77,7 +77,7 @@ func Login(c *gin.Context) {
 	// Creates a new JWT with given claims (they're convetional, not created at will)
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": user.ID,
-		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
+		"exp": time.Now().Add(time.Hour * 24 * 60).Unix(),
 	})
 
 	// (*jwt.Token).SignedString returns a complete Token with the chosen Signature and Secret
@@ -92,7 +92,7 @@ func Login(c *gin.Context) {
 	// ! Create a Cookie
 	// Cookie in the same site, http.SameSitLaxMode is equal to SameSite = Lax
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorisation", tokenStr, 3600*24*30, "", "", false, true)
+	c.SetCookie("Authorisation", tokenStr, 3600*24*60, "", "", false, true)
 
 	// check if cookie was indeed created
 	claims, ok := token.Claims.(jwt.MapClaims)
